@@ -1,6 +1,11 @@
 from pathlib import Path
 import environ
 
+
+env = environ.Env()
+environ.Env.read_env()
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -9,14 +14,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-h@5^@f+op0ti%*jm+d%dp)x$2e41av(*z!74t!*$tu53s59pae'
+SECRET_KEY = env('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+DEBUG = DEBUG = env.bool('DJANGO_DEBUG', default=False)
 
 
+# Allowed hosts (set dynamically from the environment)
+ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['localhost'])
+
+
+# Settings module for production
+
+DJANGO_SETTINGS_MODULE = env('DJANGO_SETTINGS_MODULE')
 # Application definition
 
 INSTALLED_APPS = [
@@ -95,11 +105,15 @@ CORS_ALLOW_ALL_ORIGINS = True
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': env.db('postgresql://witeithie_user:1nQDaNWMjwzME2BOiMbnUIojdeQcgGBM@dpg-cu0ff55umphs73834e50-a/witeithie'),  
 }
 
 
