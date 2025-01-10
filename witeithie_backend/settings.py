@@ -25,7 +25,8 @@ DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 
 
 # Allowed hosts (set dynamically from the environment)
-ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', '').split(',')
+ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', 'witeithie-backend.onrender.com').split(',')
+
 
 
 # Settings module for production
