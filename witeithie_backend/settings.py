@@ -25,7 +25,7 @@ SECRET_KEY ='django-insecure-h@5^@f+op0ti%*jm+d%dp)x$2e41av(*z!74t!*$tu53s59pae'
 
 DEBUG = True
 # Allowed hosts (set dynamically from the environment)
-ALLOWED_HOSTS = ['https://witeithie-backend.onrender.com']
+ALLOWED_HOSTS = ['*']
 # Settings module for production
 
 DJANGO_SETTINGS_MODULE = os.environ.get('DJANGO_SETTINGS_MODULE')
