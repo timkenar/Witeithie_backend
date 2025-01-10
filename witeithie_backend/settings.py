@@ -1,10 +1,13 @@
-import environ
+import dj_database_url
+import os
+# import environ 
+
 from pathlib import Path
 
 
 
-env = environ.Env()
-environ.Env.read_env()
+# env = environ.Env()
+# environ.Env.read_env()
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -15,19 +18,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('DJANGO_SECRET_KEY')
+SECRET_KEY ='django-insecure-h@5^@f+op0ti%*jm+d%dp)x$2e41av(*z!74t!*$tu53s59pae'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = DEBUG = env.bool('DJANGO_DEBUG', default=False)
+DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 
 
 # Allowed hosts (set dynamically from the environment)
-ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['localhost'])
+ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', '').split(',')
 
 
 # Settings module for production
 
-DJANGO_SETTINGS_MODULE = env('DJANGO_SETTINGS_MODULE')
+DJANGO_SETTINGS_MODULE = os.environ.get('DJANGO_SETTINGS_MODULE')
 # Application definition
 
 INSTALLED_APPS = [
@@ -106,16 +109,17 @@ CORS_ALLOW_ALL_ORIGINS = True
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
-    'default': env.db('postgresql://witeithie_user:1nQDaNWMjwzME2BOiMbnUIojdeQcgGBM@dpg-cu0ff55umphs73834e50-a/witeithie'),  
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
+
+
+database_url= os.environ.get('DATABASE_URL')
+DATABASES ['default']  = dj_database_url.parse(	'postgresql://witeithie_user:1nQDaNWMjwzME2BOiMbnUIojdeQcgGBM@dpg-cu0ff55umphs73834e50-a.oregon-postgres.render.com/witeithie')
+
 
 
 # Password validation
