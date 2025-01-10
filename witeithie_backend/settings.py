@@ -21,14 +21,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY ='django-insecure-h@5^@f+op0ti%*jm+d%dp)x$2e41av(*z!74t!*$tu53s59pae'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
+# DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 
-
+DEBUG = True
 # Allowed hosts (set dynamically from the environment)
-ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', 'witeithie-backend.onrender.com').split(',')
-
-
-
+ALLOWED_HOSTS = os.environ.get('https://witeithie-backend.onrender.com','127.0.0.1').split(',')
 # Settings module for production
 
 DJANGO_SETTINGS_MODULE = os.environ.get('DJANGO_SETTINGS_MODULE')
