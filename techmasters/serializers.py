@@ -1,5 +1,14 @@
 from rest_framework import serializers
-from .models import Product, Cart, DeliveryAddress, Payment
+from .models import LandingPage,Product, Cart, DeliveryAddress, Payment
+
+# techmasters/serializers.py
+
+
+class LandingPageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LandingPage
+        fields = "__all__"
+
 
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:

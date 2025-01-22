@@ -1,6 +1,20 @@
 from rest_framework import viewsets
-from .models import Product, Cart, DeliveryAddress, Payment
-from .serializers import ProductSerializer, CartSerializer, DeliveryAddressSerializer, PaymentSerializer
+from .models import Product, Cart, DeliveryAddress, Payment, LandingPage
+from .serializers import ProductSerializer, CartSerializer, DeliveryAddressSerializer, PaymentSerializer, LandingPageSerializer
+# techmasters/views.py
+
+from rest_framework.viewsets import ModelViewSet
+
+class LandingPageViewSet(ModelViewSet):
+    """
+    API endpoint to manage landing page content.
+    """
+    queryset = LandingPage.objects.all()
+    serializer_class = LandingPageSerializer
+
+    def get_queryset(self):
+        # Ensure only one LandingPage is returned, modify logic as needed.
+        return super().get_queryset().order_by("-updated_at")
 
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()

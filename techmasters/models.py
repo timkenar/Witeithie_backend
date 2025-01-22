@@ -1,6 +1,23 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
+# techmasters Landing page
+class LandingPage(models.Model):
+    title = models.CharField(max_length=255, help_text="Main heading for the landing page")
+    subtitle = models.TextField(help_text="Subheading for the landing page")
+    hero_image = models.ImageField(upload_to="landing_page/", blank=True, null=True)
+    about_title = models.CharField(max_length=255, help_text="Title for the About section")
+    about_description = models.TextField(help_text="Description for the About section")
+    contact_email = models.EmailField(help_text="Contact email displayed on the landing page")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title
+
+
+
 class Product(models.Model):
     seller = models.ForeignKey(User, on_delete=models.CASCADE, related_name='products')  # Seller reference
     name = models.CharField(max_length=255)
